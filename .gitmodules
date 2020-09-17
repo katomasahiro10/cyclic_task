@@ -1,0 +1,3 @@
+[submodule "neat-python-hyper"]
+	path = neat-python-hyper
+	url = https://github.com/katomasahiro10/neat-python-hyper.git
