@@ -32,9 +32,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Build Cython
       run: |
+        cd ./neat-python-hyper/src
+        pwd
         ls
         python cysetup.py build_ext --inplace
-      working-directory: ./neat-python-hyper/src
     - name: Build Project
       run: python setup.py install
       working-directory: ./neat-python-hyper
