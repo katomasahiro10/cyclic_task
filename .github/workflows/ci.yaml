@@ -20,6 +20,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
+        pip install numpy
+        pip install neat-python==0.92
+        pip install cython==0.28.5
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -27,6 +30,14 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zeroはすべてのエラーを警告として扱う。 GitHubのエディタの幅は127文字
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Build Cython
+      run: python cysetup.py build_ext --inplace
+      working-directory: ./neat-python-hyper/src
+    - name: Build Project
+      run: python setup.py install
+      working-directory: ./neat-python-hyper
     - name: Test task
       run: pytest -s test_task.py
       working-directory: ./test
+    - name: import test
+      run: python experiment.py
