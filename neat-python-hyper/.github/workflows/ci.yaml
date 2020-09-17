@@ -1,0 +1,49 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        pip install numpy
+        pip install neat-python==0.92
+        pip install cython==0.28.5
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zeroはすべてのエラーを警告として扱う。 GitHubのエディタの幅は127文字
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Build Cython
+      run: python cysetup.py build_ext --inplace
+      working-directory: ./src
+    - name: Build Project
+      run: python setup.py install
+    - name: Test tools
+      run: pytest -s test_tools.py
+      working-directory: ./test
+    - name: Test HyperNeat class
+      run: pytest -s test_HyperNeat.py
+      working-directory: ./test
+    - name: Test HebbianABCModel class
+      run: pytest -s test_HebbianABCModel.py
+      working-directory: ./test
+    - name: Test ModulatoryHebbianModel class
+      run: pytest -s test_ModulatoryHebbianModel.py
+      working-directory: ./test
