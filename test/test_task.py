@@ -2,6 +2,7 @@ import task
 
 def test_task():
 
+    print("")
     result = ""
     t=task.task()
     for i in range(10):
