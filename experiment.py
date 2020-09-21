@@ -82,6 +82,8 @@ def eval_fitness_B(net,print_=False):
             mymodel4.fitness += 1
             mymodel4.activate([0,1,1,0])
             history4 += 'o'
+            if(t4.is_bonus == True): #ドンピシャでボーナス
+                mymodel4.fitness += 1
         else:
             mymodel4.activate([0,1,0,1])
             history4 += 'x'
@@ -90,6 +92,8 @@ def eval_fitness_B(net,print_=False):
             mymodel5.fitness += 1
             mymodel5.activate([0,1,1,0])
             history5 += 'o'
+            if(t5.is_bonus == True): #ドンピシャでボーナス
+                mymodel5.fitness += 1
         else:
             mymodel5.activate([0,1,0,1])
             history5 += 'x'
@@ -98,6 +102,8 @@ def eval_fitness_B(net,print_=False):
             mymodel6.fitness += 1
             mymodel6.activate([0,1,1,0])
             history6 += 'o'
+            if(t6.is_bonus == True): #ドンピシャでボーナス
+                mymodel6.fitness += 1
         else:
             mymodel6.activate([0,1,0,1])
             history6 += 'x'

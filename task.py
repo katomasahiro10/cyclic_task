@@ -9,6 +9,13 @@ class task:
         cycle_no = self.step // self.cycle
         return (cycle_no) % self.rule_num
 
+    @property
+    def is_bonus(self):
+        if (self.step % self.cycle == 0):
+            return True
+        else:
+            return False
+
 def main():
     t = task()
     for i in range(10):
