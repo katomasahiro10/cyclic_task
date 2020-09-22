@@ -56,9 +56,9 @@ def eval_fitness_B(net,print_=False):
     history5 = ''
     history6 = ''
 
-    mymodel4 = hpneat.ModulatoryHebbianModel(net, hpneat_config)
-    mymodel5 = hpneat.ModulatoryHebbianModel(net, hpneat_config)
-    mymodel6 = hpneat.ModulatoryHebbianModel(net, hpneat_config)
+    mymodel4 = hpneat.HebbianABCModel(net, hpneat_config)
+    mymodel5 = hpneat.HebbianABCModel(net, hpneat_config)
+    mymodel6 = hpneat.HebbianABCModel(net, hpneat_config)
 
     mymodel4.fitness = 0
     mymodel5.fitness = 0
