@@ -25,7 +25,7 @@ def eval_fitness_A(net,print_=False):
     """
     t = task.task(5, 2)
     history = ''
-    mymodel = hpneat.HyperNeat(net, hpneat_config)
+    mymodel = hpneat.HebbianABCModel(net, hpneat_config)
     mymodel.fitness = 0
 
     for step in range(20):
