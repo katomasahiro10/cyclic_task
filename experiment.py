@@ -25,7 +25,7 @@ def eval_fitness_A(net,print_=False):
     """
     t = task.task(5, 2)
     history = ''
-    mymodel = hpneat.ModulatoryHebbianModel(net, hpneat_config)
+    mymodel = hpneat.HyperNeat(net, hpneat_config)
     mymodel.fitness = 0
 
     for step in range(20):
@@ -134,8 +134,8 @@ def eval_genomes(genomes, config):
     for genome_id, genome in genomes:
         genome.fitness = 0.0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
-        #genome.fitness = eval_fitness_A(net)
-        genome.fitness = eval_fitness_B(net)
+        genome.fitness = eval_fitness_A(net)
+        #genome.fitness = eval_fitness_B(net)
 
 def run_experiment(config_file):
     """
@@ -178,8 +178,8 @@ def run_experiment(config_file):
 
     # Check if the best genome is an adequate XOR solver
     net = neat.nn.FeedForwardNetwork.create(best_genome, config)
-    #best_genome_fitness = eval_fitness_A(net,True)
-    best_genome_fitness = eval_fitness_B(net,True)
+    best_genome_fitness = eval_fitness_A(net,True)
+    #best_genome_fitness = eval_fitness_B(net,True)
     if best_genome_fitness >= config.fitness_threshold:
         print("\n\nSUCCESS: The solver found!!!")
     else:
